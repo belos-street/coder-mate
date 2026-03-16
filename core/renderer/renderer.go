@@ -1,28 +1,24 @@
 package renderer
 
 import (
-	"fmt"
 	"strings"
+
+	"github.com/belos-street/coder-mate/core/types"
 )
 
-type Theme struct {
-	Name      string
-	Highlight string
-	Background string
-}
-
-func Render(code string, theme Theme) string {
-	var builder strings.Builder
-	builder.WriteString(fmt.Sprintf("<pre><code class=\"theme-%s\">", theme.Name))
-	builder.WriteString(code)
-	builder.WriteString("</code></pre>")
-	return builder.String()
-}
-
-func GetDefaultTheme() Theme {
-	return Theme{
-		Name:       "default",
-		Highlight: "#000000",
-		Background: "#ffffff",
+func Render(tokens []types.Token) string {
+	var result string
+	for _, token := range tokens {
+		result += `<span class="token-` + string(token.Kind) + `">` + escapeHTML(token.Value) + `</span>`
 	}
+	return result
+}
+
+func escapeHTML(s string) string {
+	s = strings.ReplaceAll(s, "&", "&amp;")
+	s = strings.ReplaceAll(s, "<", "&lt;")
+	s = strings.ReplaceAll(s, ">", "&gt;")
+	s = strings.ReplaceAll(s, `"`, "&quot;")
+	s = strings.ReplaceAll(s, "'", "&#39;")
+	return s
 }

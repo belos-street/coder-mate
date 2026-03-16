@@ -5,6 +5,7 @@ import (
 
 	"github.com/belos-street/coder-mate/core/parser"
 	"github.com/belos-street/coder-mate/core/renderer"
+	"github.com/belos-street/coder-mate/core/types"
 )
 
 func main() {
@@ -14,16 +15,15 @@ func main() {
 }
 
 func highlightCode(this js.Value, args []js.Value) interface{} {
-	if len(args) < 3 {
+	if len(args) < 2 {
 		return "error: insufficient arguments"
 	}
 
 	code := args[0].String()
-	language := args[1].String()
-	theme := args[2].String()
+	language := types.Language(args[1].String())
 
-	parsed := parser.Parse(code, language, theme)
-	result := renderer.Render(parsed, renderer.GetDefaultTheme())
+	tokens := parser.Tokenize(code, language)
+	result := renderer.Render(tokens)
 
 	return result
 }

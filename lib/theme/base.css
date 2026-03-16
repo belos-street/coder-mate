@@ -1,0 +1,19 @@
+/* Theme Index - Import the theme CSS you need */
+@import url('./default.css');
+/* @import url('./dracula.css'); */
+/* @import url('./monokai.css'); */
+/* @import url('./one-dark.css'); */
+/* @import url('./github-dark.css'); */
+/* @import url('./github-light.css'); */
+/* @import url('./nord.css'); */
+/* @import url('./tokyo-night.css'); */
+
+/* Base styles for code blocks */
+pre.code-block {
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}

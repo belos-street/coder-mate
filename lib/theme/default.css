@@ -1,0 +1,66 @@
+/* Default Theme */
+.token-keyword {
+  color: #000000;
+  font-weight: bold;
+}
+.token-string {
+  color: #008000;
+}
+.token-number {
+  color: #098658;
+}
+.token-identifier {
+  color: #000000;
+}
+.token-operator {
+  color: #000000;
+}
+.token-punctuation {
+  color: #000000;
+}
+.token-comment {
+  color: #6a9955;
+  font-style: italic;
+}
+.token-function {
+  color: #795e26;
+}
+.token-variable {
+  color: #001080;
+}
+.token-type {
+  color: #267f99;
+}
+.token-constant {
+  color: #001080;
+}
+.token-property {
+  color: #001080;
+}
+.token-tag {
+  color: #800000;
+}
+.token-attribute {
+  color: #ff0000;
+}
+.token-decorator {
+  color: #bb8000;
+}
+.token-namespace {
+  color: #000000;
+}
+.token-interpolation {
+  color: #a31515;
+}
+.token-regex {
+  color: #d16969;
+}
+.token-boolean {
+  color: #0000ff;
+}
+.token-text {
+  color: #000000;
+}
+.token-unknown {
+  color: #000000;
+}

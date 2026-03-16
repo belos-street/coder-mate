@@ -1,0 +1,22 @@
+/* Monokai Theme */
+.token-keyword { color: #f92672; }
+.token-string { color: #e6db74; }
+.token-number { color: #ae81ff; }
+.token-identifier { color: #f8f8f2; }
+.token-operator { color: #f92672; }
+.token-punctuation { color: #f8f8f2; }
+.token-comment { color: #75715e; }
+.token-function { color: #a6e22e; }
+.token-variable { color: #f8f8f2; }
+.token-type { color: #66d9ef; }
+.token-constant { color: #ae81ff; }
+.token-property { color: #a6e22e; }
+.token-tag { color: #f92672; }
+.token-attribute { color: #a6e22e; }
+.token-decorator { color: #66d9ef; }
+.token-namespace { color: #f8f8f2; }
+.token-interpolation { color: #e6db74; }
+.token-regex { color: #ae81ff; }
+.token-boolean { color: #f92672; }
+.token-text { color: #f8f8f2; }
+.token-unknown { color: #f8f8f2; }
