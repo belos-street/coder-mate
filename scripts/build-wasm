@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+echo "Building WASM..."
+cd "$PROJECT_ROOT/core"
+GOOS=js GOARCH=wasm go build -o "$PROJECT_ROOT/bin/coder-mate.wasm" .
+echo "Build complete: $PROJECT_ROOT/bin/coder-mate.wasm"

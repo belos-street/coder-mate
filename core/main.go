@@ -2,11 +2,14 @@ package main
 
 import (
 	"syscall/js"
+
+	"github.com/belos-street/coder-mate/core/parser"
+	"github.com/belos-street/coder-mate/core/renderer"
 )
 
 func main() {
 	js.Global().Set("highlightCode", js.FuncOf(highlightCode))
-	
+
 	select {}
 }
 
@@ -19,10 +22,8 @@ func highlightCode(this js.Value, args []js.Value) interface{} {
 	language := args[1].String()
 	theme := args[2].String()
 
-	result := parseCode(code, language, theme)
-	return result
-}
+	parsed := parser.Parse(code, language, theme)
+	result := renderer.Render(parsed, renderer.GetDefaultTheme())
 
-func parseCode(code, language, theme string) string {
-	return "Hello from WASM! Code: " + code + ", Language: " + language + ", Theme: " + theme
+	return result
 }
