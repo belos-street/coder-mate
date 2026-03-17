@@ -1,9 +1,18 @@
 {
   "name": "coder-mate",
-  "module": "main.ts",
+  "module": "dist/main.js",
+  "types": "dist/main.d.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun ./scripts/build.ts",
+    "build:wasm": "GOOS=js GOARCH=wasm go build -o ./bin/coder-mate.wasm ./core"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
