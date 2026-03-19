@@ -6,3 +6,4 @@ export type {
   CodeToHtmlOptions,
   CodeToTokensOptions
 } from './highlighter'
+export type { WorkerMessage, WorkerResponse } from './worker'

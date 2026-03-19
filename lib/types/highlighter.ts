@@ -4,7 +4,6 @@ import type { Token } from './token'
 
 export type CodeToHtmlOptions = {
   lang: Language
-  theme: Theme
 }
 
 export type CodeToTokensOptions = {
@@ -12,17 +11,8 @@ export type CodeToTokensOptions = {
 }
 
 export type Highlighter = {
-  codeToHtml(
-    code: string,
-    options: {
-      lang: Language
-    }
-  ): string
-  codeToTokens(
-    code: string,
-    options: {
-      lang: Language
-    }
-  ): Token[]
+  codeToHtml(code: string, options: CodeToHtmlOptions): Promise<string>
+  codeToTokens(code: string, options: CodeToTokensOptions): Promise<Token[]>
   dispose(): void
+  setTheme(theme: Theme): void
 }

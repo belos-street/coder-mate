@@ -1,3 +1,5 @@
+import './theme/base.css'
+
 export { createHighlighter } from './core/highlighter'
 
 export type {

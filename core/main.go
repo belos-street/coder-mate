@@ -1,6 +1,10 @@
+//go:build js && wasm
+// +build js,wasm
+
 package main
 
 import (
+	"encoding/json"
 	"syscall/js"
 
 	"github.com/belos-street/coder-mate/core/parser"
@@ -8,22 +12,34 @@ import (
 	"github.com/belos-street/coder-mate/core/types"
 )
 
-func main() {
-	js.Global().Set("highlightCode", js.FuncOf(highlightCode))
+var globalParser *parser.Parser
 
+func main() {
+	globalParser = parser.New()
+	globalParser.Register(types.LangJavaScript, parser.NewJavaScriptParser())
+	js.Global().Set("highlightCode", js.FuncOf(highlightCode))
 	select {}
 }
 
 func highlightCode(this js.Value, args []js.Value) interface{} {
-	if len(args) < 2 {
+	if len(args) < 3 {
 		return "error: insufficient arguments"
 	}
 
 	code := args[0].String()
 	language := types.Language(args[1].String())
+	mode := types.Mode(args[2].String())
 
-	tokens := parser.Tokenize(code, language)
-	result := renderer.Render(tokens)
+	tokens := globalParser.Parse(code, language)
 
-	return result
+	if mode == types.ModeHTML {
+		return renderer.Render(tokens)
+	}
+
+	jsonBytes, err := json.Marshal(tokens)
+	if err != nil {
+		return "error: failed to marshal tokens"
+	}
+
+	return string(jsonBytes)
 }

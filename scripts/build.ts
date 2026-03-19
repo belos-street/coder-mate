@@ -9,9 +9,18 @@ const WASM_PATH = `${BIN_DIR}/coder-mate.wasm`
 
 function buildJs() {
   console.log('Building JS...')
-  execSync('bun build ./lib/main.ts --outdir ./dist --format esm', {
-    cwd: PROJECT_ROOT
-  })
+  execSync(
+    'bun build ./lib/main.ts --outdir ./dist --format esm --target browser',
+    {
+      cwd: PROJECT_ROOT
+    }
+  )
+  execSync(
+    'bun build ./lib/core/worker.ts --outfile ./dist/worker.js --format esm --target browser',
+    {
+      cwd: PROJECT_ROOT
+    }
+  )
   execSync('tsc -p tsconfig.build.json', { cwd: PROJECT_ROOT })
 
   if (!existsSync(WASM_PATH)) {
@@ -24,8 +33,8 @@ function buildJs() {
 
 function buildWasm() {
   console.log('Building WASM...')
-  execSync('GOOS=js GOARCH=wasm go build -o ../bin/coder-mate.wasm .', {
-    cwd: `${PROJECT_ROOT}/core`
+  execSync('bash ./scripts/build-wasm', {
+    cwd: PROJECT_ROOT
   })
   cpSync(WASM_PATH, `${DIST_DIR}/coder-mate.wasm`)
   console.log('WASM build complete')

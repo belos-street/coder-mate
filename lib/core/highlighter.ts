@@ -2,73 +2,69 @@ import type {
   Token,
   Highlighter,
   CodeToTokensOptions,
-  CodeToHtmlOptions
+  CodeToHtmlOptions,
+  WorkerMessage,
+  WorkerResponse,
+  Theme
 } from '../types'
-import {
-  initWasm,
-  ensureWasm,
-  incrementInstance,
-  decrementInstance,
-  getInstanceCount,
-  resetWasm
-} from '../loader'
 
 export async function createHighlighter(): Promise<Highlighter> {
-  await initWasm()
-  incrementInstance()
+  const worker = new Worker(new URL('./worker.js', import.meta.url))
 
   return {
-    codeToHtml(code: string, opts: CodeToHtmlOptions): string {
-      ensureWasm()
-
-      const html = (globalThis as any).highlightCode(
+    async codeToHtml(code: string, opts: CodeToHtmlOptions): Promise<string> {
+      const result = await postMessage(worker, {
+        type: 'highlight',
         code,
-        opts.lang,
-        opts.theme
-      )
-      return html
+        lang: opts.lang,
+        mode: 'html'
+      })
+      return result as string
     },
 
-    codeToTokens(code: string, opts: CodeToTokensOptions): Token[] {
-      ensureWasm()
-
-      const html = (globalThis as any).highlightCode(code, opts.lang)
-      return parseTokensFromHtml(html)
+    async codeToTokens(
+      code: string,
+      opts: CodeToTokensOptions
+    ): Promise<Token[]> {
+      const result = await postMessage(worker, {
+        type: 'highlight',
+        code,
+        lang: opts.lang,
+        mode: 'tokens'
+      })
+      return result as Token[]
     },
 
     dispose(): void {
-      decrementInstance()
-      if (getInstanceCount() === 0) {
-        resetWasm()
-      }
-    }
+      worker.postMessage({ type: 'dispose' })
+      worker.terminate()
+    },
+
+    setTheme
   }
 }
 
-function parseTokensFromHtml(html: string): Token[] {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(html, 'text/html')
-  const spans = doc.querySelectorAll('span')
+function postMessage(worker: Worker, data: WorkerMessage): Promise<unknown> {
+  return new Promise((resolve, reject) => {
+    const handler = (event: MessageEvent<WorkerResponse>) => {
+      const response = event.data
 
-  const tokens: Token[] = []
-  let line = 1
-  let col = 1
+      if (response.type === 'result') {
+        resolve(response.data)
+      } else if (response.type === 'error') {
+        reject(new Error(response.message))
+      } else if (response.type === 'disposed') {
+        resolve(null)
+      }
 
-  spans.forEach((span) => {
-    const className = span.className || ''
-    const type = className.replace('token-', '') as Token['type']
-    const value = span.textContent || ''
-
-    tokens.push({ type, value, line, col })
-
-    const lines = value.split('\n')
-    if (lines.length > 1) {
-      line += lines.length - 1
-      col = lines[lines.length - 1].length + 1
-    } else {
-      col += value.length
+      worker.removeEventListener('message', handler)
     }
-  })
 
-  return tokens
+    worker.addEventListener('message', handler)
+    worker.postMessage(data)
+  })
+}
+
+function setTheme(theme: Theme): void {
+  document.documentElement.setAttribute('data-theme', theme)
 }

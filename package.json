@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "bun ./scripts/build.ts",
-    "build:wasm": "GOOS=js GOARCH=wasm go build -o ./bin/coder-mate.wasm ./core"
+    "build:wasm": "./scripts/build-wasm",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "latest",
