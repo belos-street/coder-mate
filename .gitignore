@@ -204,5 +204,5 @@ dist
 .DS_Store
 
 .trae/
-./test/
+test/
 bin/

@@ -9,14 +9,9 @@ import (
 
 	"github.com/belos-street/coder-mate/core/parser"
 	"github.com/belos-street/coder-mate/core/renderer"
-	"github.com/belos-street/coder-mate/core/types"
 )
 
-var globalParser *parser.Parser
-
 func main() {
-	globalParser = parser.New()
-	globalParser.Register(types.LangJavaScript, parser.NewJavaScriptParser())
 	js.Global().Set("highlightCode", js.FuncOf(highlightCode))
 	select {}
 }
@@ -27,12 +22,12 @@ func highlightCode(this js.Value, args []js.Value) interface{} {
 	}
 
 	code := args[0].String()
-	language := types.Language(args[1].String())
-	mode := types.Mode(args[2].String())
+	language := args[1].String()
+	mode := args[2].String()
 
-	tokens := globalParser.Parse(code, language)
+	tokens := parser.Parse(code, language)
 
-	if mode == types.ModeHTML {
+	if mode == "html" {
 		return renderer.Render(tokens)
 	}
 
