@@ -1,6 +1,7 @@
 package javascript
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/belos-street/coder-mate/core/types"
@@ -186,6 +187,139 @@ func TestParse_EmptyLine(t *testing.T) {
 
 	if len(tokenLines[2]) != 1 {
 		t.Errorf("expected third line to have 1 token")
+	}
+}
+
+func TestParse_ES2020_BigInt(t *testing.T) {
+	code := "const num = 123n"
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 1 {
+		t.Fatalf("expected 1 line, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	hasBigInt := false
+	for _, token := range tokens {
+		if token.Kind == types.TokenKindNumber && token.Value == "123n" {
+			hasBigInt = true
+			break
+		}
+	}
+
+	if !hasBigInt {
+		t.Error("expected to find BigInt literal '123n'")
+	}
+}
+
+func TestParse_ES2020_OptionalChaining(t *testing.T) {
+	code := "const city = user?.address?.city"
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 1 {
+		t.Fatalf("expected 1 line, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	hasOptionalChaining := false
+	for _, token := range tokens {
+		if token.Kind == types.TokenKindOperator && token.Value == "?." {
+			hasOptionalChaining = true
+			break
+		}
+	}
+
+	if !hasOptionalChaining {
+		t.Error("expected to find optional chaining operator '?.'")
+	}
+}
+
+func TestParse_ES2020_NullishCoalescing(t *testing.T) {
+	code := "const age = user?.age ?? 18"
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 1 {
+		t.Fatalf("expected 1 line, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	hasNullishCoalescing := false
+	for _, token := range tokens {
+		if token.Kind == types.TokenKindOperator && token.Value == "??" {
+			hasNullishCoalescing = true
+			break
+		}
+	}
+
+	if !hasNullishCoalescing {
+		t.Error("expected to find nullish coalescing operator '??'")
+	}
+}
+
+func TestParse_ES2020_TemplateString(t *testing.T) {
+	code := "const msg = `Hello, ${name}!`"
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 1 {
+		t.Fatalf("expected 1 line, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	hasInterpolation := false
+	for _, token := range tokens {
+		if token.Kind == types.TokenKindInterpolation {
+			hasInterpolation = true
+			break
+		}
+	}
+
+	if !hasInterpolation {
+		t.Errorf("expected to find template interpolation '${', got tokens: %+v", tokens)
+	}
+}
+
+func TestParse_ES2020_GlobalThis(t *testing.T) {
+	code := "console.log(globalThis)"
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 1 {
+		t.Fatalf("expected 1 line, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	hasGlobalThis := false
+	for _, token := range tokens {
+		if token.Kind == types.TokenKindKeyword && token.Value == "globalThis" {
+			hasGlobalThis = true
+			break
+		}
+	}
+
+	if !hasGlobalThis {
+		t.Error("expected to find 'globalThis' keyword")
+	}
+}
+
+func TestParse_MultilineComment(t *testing.T) {
+	code := `/* This is a
+   multi-line comment */`
+	tokenLines := Parse(code)
+
+	if len(tokenLines) != 2 {
+		t.Fatalf("expected 2 lines, got %d", len(tokenLines))
+	}
+
+	tokens := tokenLines[0]
+	if len(tokens) != 1 {
+		t.Errorf("expected first line to have 1 token")
+	}
+
+	if tokens[0].Kind != types.TokenKindComment {
+		t.Errorf("expected first token to be comment")
+	}
+
+	if !strings.HasPrefix(tokens[0].Value, "/*") {
+		t.Errorf("expected first token value to start with '/*', got '%s'", tokens[0].Value)
 	}
 }
 
