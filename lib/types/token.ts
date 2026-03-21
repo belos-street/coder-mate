@@ -21,7 +21,7 @@ export type TokenKind =
   | 'text'
   | 'unknown'
 
-export interface Token {
+export type Token = {
   type: TokenKind
   value: string
   line: number

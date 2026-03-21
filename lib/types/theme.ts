@@ -1,7 +1,5 @@
 export type Theme =
   | 'default'
-  | 'dark'
-  | 'light'
   | 'dracula'
   | 'monokai'
   | 'github-light'

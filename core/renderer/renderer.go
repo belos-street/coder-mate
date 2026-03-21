@@ -6,10 +6,12 @@ import (
 	"github.com/belos-street/coder-mate/core/types"
 )
 
-func Render(tokens []types.Token) string {
+func Render(tokens types.TokenLines) string {
 	var result string
-	for _, token := range tokens {
-		result += `<span class="token-` + string(token.Kind) + `">` + escapeHTML(token.Value) + `</span>`
+	for _, line := range tokens {
+		for _, token := range line {
+			result += `<span class="token-` + string(token.Kind) + `">` + escapeHTML(token.Value) + `</span>`
+		}
 	}
 	return result
 }

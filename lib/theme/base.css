@@ -1,19 +1,569 @@
-/* Theme Index - Import the theme CSS you need */
-@import url('./default.css');
-/* @import url('./dracula.css'); */
-/* @import url('./monokai.css'); */
-/* @import url('./one-dark.css'); */
-/* @import url('./github-dark.css'); */
-/* @import url('./github-light.css'); */
-/* @import url('./nord.css'); */
-/* @import url('./tokyo-night.css'); */
+/* Base Theme - CSS Variables */
+:root {
+  /* Container Colors - Default */
+  --coder-mate-bg: #ffffff;
+  --coder-mate-fg: #000000;
+  --coder-mate-gutter-bg: #f5f5f5;
+  --coder-mate-gutter-fg: #999999;
 
-/* Base styles for code blocks */
-pre.code-block {
-  padding: 16px;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.5;
+  /* Token Colors - Default */
+  --coder-mate-token-keyword: #000000;
+  --coder-mate-token-string: #008000;
+  --coder-mate-token-number: #098658;
+  --coder-mate-token-identifier: #000000;
+  --coder-mate-token-operator: #000000;
+  --coder-mate-token-punctuation: #000000;
+  --coder-mate-token-comment: #6a9955;
+  --coder-mate-token-function: #795e26;
+  --coder-mate-token-variable: #001080;
+  --coder-mate-token-type: #267f99;
+  --coder-mate-token-constant: #001080;
+  --coder-mate-token-property: #001080;
+  --coder-mate-token-tag: #800000;
+  --coder-mate-token-attribute: #ff0000;
+  --coder-mate-token-decorator: #bb8000;
+  --coder-mate-token-namespace: #000000;
+  --coder-mate-token-interpolation: #a31515;
+  --coder-mate-token-regex: #d16969;
+  --coder-mate-token-boolean: #0000ff;
+  --coder-mate-token-text: #000000;
+  --coder-mate-token-unknown: #000000;
+}
+
+/* Dracula Theme */
+[data-theme='dracula'] {
+  --coder-mate-bg: #282a36;
+  --coder-mate-fg: #f8f8f2;
+  --coder-mate-gutter-bg: #44475a;
+  --coder-mate-gutter-fg: #6272a4;
+
+  --coder-mate-token-keyword: #ff79c6;
+  --coder-mate-token-string: #f1fa8c;
+  --coder-mate-token-number: #bd93f9;
+  --coder-mate-token-identifier: #f8f8f2;
+  --coder-mate-token-operator: #ff79c6;
+  --coder-mate-token-punctuation: #f8f8f2;
+  --coder-mate-token-comment: #6272a4;
+  --coder-mate-token-function: #50fa7b;
+  --coder-mate-token-variable: #f8f8f2;
+  --coder-mate-token-type: #8be9fd;
+  --coder-mate-token-constant: #bd93f9;
+  --coder-mate-token-property: #66d9ef;
+  --coder-mate-token-tag: #ff79c6;
+  --coder-mate-token-attribute: #50fa7b;
+  --coder-mate-token-decorator: #ff79c6;
+  --coder-mate-token-namespace: #f8f8f2;
+  --coder-mate-token-interpolation: #f1fa8c;
+  --coder-mate-token-regex: #ff5555;
+  --coder-mate-token-boolean: #ff79c6;
+  --coder-mate-token-text: #f8f8f2;
+  --coder-mate-token-unknown: #f8f8f2;
+}
+
+/* Monokai Theme */
+[data-theme='monokai'] {
+  --coder-mate-bg: #272822;
+  --coder-mate-fg: #f8f8f2;
+  --coder-mate-gutter-bg: #3e3d32;
+  --coder-mate-gutter-fg: #75715e;
+
+  --coder-mate-token-keyword: #f92672;
+  --coder-mate-token-string: #e6db74;
+  --coder-mate-token-number: #ae81ff;
+  --coder-mate-token-identifier: #f8f8f2;
+  --coder-mate-token-operator: #f92672;
+  --coder-mate-token-punctuation: #f8f8f2;
+  --coder-mate-token-comment: #75715e;
+  --coder-mate-token-function: #a6e22e;
+  --coder-mate-token-variable: #f8f8f2;
+  --coder-mate-token-type: #66d9ef;
+  --coder-mate-token-constant: #ae81ff;
+  --coder-mate-token-property: #a6e22e;
+  --coder-mate-token-tag: #f92672;
+  --coder-mate-token-attribute: #a6e22e;
+  --coder-mate-token-decorator: #66d9ef;
+  --coder-mate-token-namespace: #f8f8f2;
+  --coder-mate-token-interpolation: #e6db74;
+  --coder-mate-token-regex: #ae81ff;
+  --coder-mate-token-boolean: #f92672;
+  --coder-mate-token-text: #f8f8f2;
+  --coder-mate-token-unknown: #f8f8f2;
+}
+
+/* One Dark Theme */
+[data-theme='one-dark'] {
+  --coder-mate-bg: #282c34;
+  --coder-mate-fg: #abb2bf;
+  --coder-mate-gutter-bg: #21252b;
+  --coder-mate-gutter-fg: #636d83;
+
+  --coder-mate-token-keyword: #c678dd;
+  --coder-mate-token-string: #98c379;
+  --coder-mate-token-number: #d19a66;
+  --coder-mate-token-identifier: #e06c75;
+  --coder-mate-token-operator: #56b6c2;
+  --coder-mate-token-punctuation: #abb2bf;
+  --coder-mate-token-comment: #5c6370;
+  --coder-mate-token-function: #61afef;
+  --coder-mate-token-variable: #e06c75;
+  --coder-mate-token-type: #e5c07b;
+  --coder-mate-token-constant: #d19a66;
+  --coder-mate-token-property: #e06c75;
+  --coder-mate-token-tag: #e06c75;
+  --coder-mate-token-attribute: #d19a66;
+  --coder-mate-token-decorator: #c678dd;
+  --coder-mate-token-namespace: #e06c75;
+  --coder-mate-token-interpolation: #98c379;
+  --coder-mate-token-regex: #d19a66;
+  --coder-mate-token-boolean: #c678dd;
+  --coder-mate-token-text: #abb2bf;
+  --coder-mate-token-unknown: #abb2bf;
+}
+
+/* GitHub Dark Theme */
+[data-theme='github-dark'] {
+  --coder-mate-bg: #0d1117;
+  --coder-mate-fg: #c9d1d9;
+  --coder-mate-gutter-bg: #161b22;
+  --coder-mate-gutter-fg: #6e7681;
+
+  --coder-mate-token-keyword: #ff7b72;
+  --coder-mate-token-string: #a5d6ff;
+  --coder-mate-token-number: #79c0ff;
+  --coder-mate-token-identifier: #c9d1d9;
+  --coder-mate-token-operator: #c9d1d9;
+  --coder-mate-token-punctuation: #c9d1d9;
+  --coder-mate-token-comment: #8b949e;
+  --coder-mate-token-function: #d2a8ff;
+  --coder-mate-token-variable: #c9d1d9;
+  --coder-mate-token-type: #79c0ff;
+  --coder-mate-token-constant: #79c0ff;
+  --coder-mate-token-property: #79c0ff;
+  --coder-mate-token-tag: #7ee787;
+  --coder-mate-token-attribute: #d2a8ff;
+  --coder-mate-token-decorator: #ff7b72;
+  --coder-mate-token-namespace: #c9d1d9;
+  --coder-mate-token-interpolation: #a5d6ff;
+  --coder-mate-token-regex: #a5d6ff;
+  --coder-mate-token-boolean: #79c0ff;
+  --coder-mate-token-text: #c9d1d9;
+  --coder-mate-token-unknown: #c9d1d9;
+}
+
+/* GitHub Light Theme */
+[data-theme='github-light'] {
+  --coder-mate-bg: #ffffff;
+  --coder-mate-fg: #24292e;
+  --coder-mate-gutter-bg: #f6f8fa;
+  --coder-mate-gutter-fg: #6e7781;
+
+  --coder-mate-token-keyword: #d73a49;
+  --coder-mate-token-string: #032f62;
+  --coder-mate-token-number: #005cc5;
+  --coder-mate-token-identifier: #24292e;
+  --coder-mate-token-operator: #24292e;
+  --coder-mate-token-punctuation: #24292e;
+  --coder-mate-token-comment: #6a737d;
+  --coder-mate-token-function: #6f42c1;
+  --coder-mate-token-variable: #24292e;
+  --coder-mate-token-type: #005cc5;
+  --coder-mate-token-constant: #005cc5;
+  --coder-mate-token-property: #005cc5;
+  --coder-mate-token-tag: #22863a;
+  --coder-mate-token-attribute: #6f42c1;
+  --coder-mate-token-decorator: #d73a49;
+  --coder-mate-token-namespace: #24292e;
+  --coder-mate-token-interpolation: #032f62;
+  --coder-mate-token-regex: #032f62;
+  --coder-mate-token-boolean: #005cc5;
+  --coder-mate-token-text: #24292e;
+  --coder-mate-token-unknown: #24292e;
+}
+
+/* Nord Theme */
+[data-theme='nord'] {
+  --coder-mate-bg: #2e3440;
+  --coder-mate-fg: #d8dee9;
+  --coder-mate-gutter-bg: #3b4252;
+  --coder-mate-gutter-fg: #4c566a;
+
+  --coder-mate-token-keyword: #81a1c1;
+  --coder-mate-token-string: #a3be8c;
+  --coder-mate-token-number: #b48ead;
+  --coder-mate-token-identifier: #d8dee9;
+  --coder-mate-token-operator: #81a1c1;
+  --coder-mate-token-punctuation: #d8dee9;
+  --coder-mate-token-comment: #616e88;
+  --coder-mate-token-function: #88c0d0;
+  --coder-mate-token-variable: #d8dee9;
+  --coder-mate-token-type: #8fbcbb;
+  --coder-mate-token-constant: #b48ead;
+  --coder-mate-token-property: #88c0d0;
+  --coder-mate-token-tag: #81a1c1;
+  --coder-mate-token-attribute: #8fbcbb;
+  --coder-mate-token-decorator: #d8dee9;
+  --coder-mate-token-namespace: #d8dee9;
+  --coder-mate-token-interpolation: #a3be8c;
+  --coder-mate-token-regex: #b48ead;
+  --coder-mate-token-boolean: #81a1c1;
+  --coder-mate-token-text: #d8dee9;
+  --coder-mate-token-unknown: #d8dee9;
+}
+
+/* Tokyo Night Theme */
+[data-theme='tokyo-night'] {
+  --coder-mate-bg: #1a1b26;
+  --coder-mate-fg: #a9b1d6;
+  --coder-mate-gutter-bg: #24283b;
+  --coder-mate-gutter-fg: #565f89;
+
+  --coder-mate-token-keyword: #bb9af7;
+  --coder-mate-token-string: #9ece6a;
+  --coder-mate-token-number: #ff9e64;
+  --coder-mate-token-identifier: #7aa2f7;
+  --coder-mate-token-operator: #89ddff;
+  --coder-mate-token-punctuation: #a9b1d6;
+  --coder-mate-token-comment: #565f89;
+  --coder-mate-token-function: #7dcfff;
+  --coder-mate-token-variable: #7aa2f7;
+  --coder-mate-token-type: #7aa2f7;
+  --coder-mate-token-constant: #ff9e64;
+  --coder-mate-token-property: #7aa2f7;
+  --coder-mate-token-tag: #f7768e;
+  --coder-mate-token-attribute: #7aa2f7;
+  --coder-mate-token-decorator: #bb9af7;
+  --coder-mate-token-namespace: #7aa2f7;
+  --coder-mate-token-interpolation: #9ece6a;
+  --coder-mate-token-regex: #ff9e64;
+  --coder-mate-token-boolean: #bb9af7;
+  --coder-mate-token-text: #a9b1d6;
+  --coder-mate-token-unknown: #a9b1d6;
+}
+
+/* VSCode Dark Theme */
+[data-theme='vscode-dark'] {
+  --coder-mate-bg: #1e1e1e;
+  --coder-mate-fg: #d4d4d4;
+  --coder-mate-gutter-bg: #252526;
+  --coder-mate-gutter-fg: #858585;
+
+  --coder-mate-token-keyword: #569cd6;
+  --coder-mate-token-string: #ce9178;
+  --coder-mate-token-number: #b5cea8;
+  --coder-mate-token-identifier: #9cdcfe;
+  --coder-mate-token-operator: #d4d4d4;
+  --coder-mate-token-punctuation: #d4d4d4;
+  --coder-mate-token-comment: #6a9955;
+  --coder-mate-token-function: #dcdcaa;
+  --coder-mate-token-variable: #9cdcfe;
+  --coder-mate-token-type: #4ec9b0;
+  --coder-mate-token-constant: #569cd6;
+  --coder-mate-token-property: #9cdcfe;
+  --coder-mate-token-tag: #569cd6;
+  --coder-mate-token-attribute: #9cdcfe;
+}
+
+/* VSCode Light Theme */
+[data-theme='vscode-light'] {
+  --coder-mate-bg: #ffffff;
+  --coder-mate-fg: #000000;
+  --coder-mate-gutter-bg: #f3f3f3;
+  --coder-mate-gutter-fg: #aaaaaa;
+
+  --coder-mate-token-keyword: #0000ff;
+  --coder-mate-token-string: #a31515;
+  --coder-mate-token-number: #098658;
+  --coder-mate-token-identifier: #001080;
+  --coder-mate-token-operator: #000000;
+  --coder-mate-token-punctuation: #000000;
+  --coder-mate-token-comment: #008000;
+  --coder-mate-token-function: #795e26;
+  --coder-mate-token-variable: #001080;
+  --coder-mate-token-type: #267f99;
+  --coder-mate-token-constant: #0000ff;
+  --coder-mate-token-property: #001080;
+  --coder-mate-token-tag: #800000;
+  --coder-mate-token-attribute: #ff0000;
+}
+
+/* Night Owl Theme */
+[data-theme='night-owl'] {
+  --coder-mate-bg: #011627;
+  --coder-mate-fg: #d6deeb;
+  --coder-mate-gutter-bg: #011627;
+  --coder-mate-gutter-fg: #4b6479;
+
+  --coder-mate-token-keyword: #c792ea;
+  --coder-mate-token-string: #ecc48d;
+  --coder-mate-token-number: #f78c6c;
+  --coder-mate-token-identifier: #82aaff;
+  --coder-mate-token-operator: #89ddff;
+  --coder-mate-token-punctuation: #c792ea;
+  --coder-mate-token-comment: #637777;
+  --coder-mate-token-function: #82aaff;
+  --coder-mate-token-variable: #f78c6c;
+  --coder-mate-token-type: #ffcb6b;
+  --coder-mate-token-constant: #f78c6c;
+  --coder-mate-token-property: #80cbc4;
+  --coder-mate-token-tag: #f07178;
+  --coder-mate-token-attribute: #ffcb6b;
+}
+
+/* Ayu Dark Theme */
+[data-theme='ayu-dark'] {
+  --coder-mate-bg: #0a0e14;
+  --coder-mate-fg: #e6e1cf;
+  --coder-mate-gutter-bg: #0d1017;
+  --coder-mate-gutter-fg: #626a73;
+
+  --coder-mate-token-keyword: #ff8f40;
+  --coder-mate-token-string: #aad94c;
+  --coder-mate-token-number: #e6af2e;
+  --coder-mate-token-identifier: #ff8f40;
+  --coder-mate-token-operator: #ff8f40;
+  --coder-mate-token-punctuation: #e6e1cf;
+  --coder-mate-token-comment: #626a73;
+  --coder-mate-token-function: #ffb454;
+  --coder-mate-token-variable: #e6e1cf;
+  --coder-mate-token-type: #ffb454;
+  --coder-mate-token-constant: #ff8f40;
+  --coder-mate-token-property: #ffb454;
+  --coder-mate-token-tag: #ff8f40;
+  --coder-mate-token-attribute: #ffb454;
+}
+
+/* Ayu Light Theme */
+[data-theme='ayu-light'] {
+  --coder-mate-bg: #fafafa;
+  --coder-mate-fg: #5c6773;
+  --coder-mate-gutter-bg: #f4f4f4;
+  --coder-mate-gutter-fg: #a0a0a0;
+
+  --coder-mate-token-keyword: #f29e74;
+  --coder-mate-token-string: #8abf77;
+  --coder-mate-token-number: #d5a008;
+  --coder-mate-token-identifier: #f29e74;
+  --coder-mate-token-operator: #f29e74;
+  --coder-mate-token-punctuation: #5c6773;
+  --coder-mate-token-comment: #a0a0a0;
+  --coder-mate-token-function: #b5835a;
+  --coder-mate-token-variable: #5c6773;
+  --coder-mate-token-type: #b5835a;
+  --coder-mate-token-constant: #f29e74;
+  --coder-mate-token-property: #b5835a;
+  --coder-mate-token-tag: #f29e74;
+  --coder-mate-token-attribute: #b5835a;
+}
+
+/* Gruvbox Dark Theme */
+[data-theme='gruvbox-dark'] {
+  --coder-mate-bg: #282828;
+  --coder-mate-fg: #ebdbb2;
+  --coder-mate-gutter-bg: #3c3836;
+  --coder-mate-gutter-fg: #665c54;
+
+  --coder-mate-token-keyword: #fb4934;
+  --coder-mate-token-string: #b8bb26;
+  --coder-mate-token-number: #d3869b;
+  --coder-mate-token-identifier: #fabd2f;
+  --coder-mate-token-operator: #fb4934;
+  --coder-mate-token-punctuation: #ebdbb2;
+  --coder-mate-token-comment: #928374;
+  --coder-mate-token-function: #fabd2f;
+  --coder-mate-token-variable: #ebdbb2;
+  --coder-mate-token-type: #fabd2f;
+  --coder-mate-token-constant: #d3869b;
+  --coder-mate-token-property: #fabd2f;
+  --coder-mate-token-tag: #fb4934;
+  --coder-mate-token-attribute: #fabd2f;
+}
+
+/* Gruvbox Light Theme */
+[data-theme='gruvbox-light'] {
+  --coder-mate-bg: #fbf1c7;
+  --coder-mate-fg: #3c3836;
+  --coder-mate-gutter-bg: #ebdbb2;
+  --coder-mate-gutter-fg: #9e8f7a;
+
+  --coder-mate-token-keyword: #cc241d;
+  --coder-mate-token-string: #98971a;
+  --coder-mate-token-number: #b16286;
+  --coder-mate-token-identifier: #d79921;
+  --coder-mate-token-operator: #cc241d;
+  --coder-mate-token-punctuation: #3c3836;
+  --coder-mate-token-comment: #928374;
+  --coder-mate-token-function: #d79921;
+  --coder-mate-token-variable: #3c3836;
+  --coder-mate-token-type: #d79921;
+  --coder-mate-token-constant: #b16286;
+  --coder-mate-token-property: #d79921;
+  --coder-mate-token-tag: #cc241d;
+  --coder-mate-token-attribute: #d79921;
+}
+
+/* Solarized Dark Theme */
+[data-theme='solarized-dark'] {
+  --coder-mate-bg: #002b36;
+  --coder-mate-fg: #839496;
+  --coder-mate-gutter-bg: #073642;
+  --coder-mate-gutter-fg: #586e75;
+
+  --coder-mate-token-keyword: #859900;
+  --coder-mate-token-string: #2aa198;
+  --coder-mate-token-number: #d33682;
+  --coder-mate-token-identifier: #268bd2;
+  --coder-mate-token-operator: #859900;
+  --coder-mate-token-punctuation: #839496;
+  --coder-mate-token-comment: #586e75;
+  --coder-mate-token-function: #b58900;
+  --coder-mate-token-variable: #268bd2;
+  --coder-mate-token-type: #b58900;
+  --coder-mate-token-constant: #d33682;
+  --coder-mate-token-property: #268bd2;
+  --coder-mate-token-tag: #859900;
+  --coder-mate-token-attribute: #b58900;
+}
+
+/* Solarized Light Theme */
+[data-theme='solarized-light'] {
+  --coder-mate-bg: #fdf6e3;
+  --coder-mate-fg: #657b83;
+  --coder-mate-gutter-bg: #eee8d5;
+  --coder-mate-gutter-fg: #93a1a1;
+
+  --coder-mate-token-keyword: #859900;
+  --coder-mate-token-string: #2aa198;
+  --coder-mate-token-number: #d33682;
+  --coder-mate-token-identifier: #268bd2;
+  --coder-mate-token-operator: #859900;
+  --coder-mate-token-punctuation: #657b83;
+  --coder-mate-token-comment: #93a1a1;
+  --coder-mate-token-function: #b58900;
+  --coder-mate-token-variable: #268bd2;
+  --coder-mate-token-type: #b58900;
+  --coder-mate-token-constant: #d33682;
+  --coder-mate-token-property: #268bd2;
+  --coder-mate-token-tag: #859900;
+  --coder-mate-token-attribute: #b58900;
+}
+
+/* Material Dark Theme */
+[data-theme='material-dark'] {
+  --coder-mate-bg: #263238;
+  --coder-mate-fg: #eceff1;
+  --coder-mate-gutter-bg: #1c2529;
+  --coder-mate-gutter-fg: #546e7a;
+
+  --coder-mate-token-keyword: #c792ea;
+  --coder-mate-token-string: #c3e88d;
+  --coder-mate-token-number: #f78c6c;
+  --coder-mate-token-identifier: #82aaff;
+  --coder-mate-token-operator: #89ddff;
+  --coder-mate-token-punctuation: #89ddff;
+  --coder-mate-token-comment: #546e7a;
+  --coder-mate-token-function: #82aaff;
+  --coder-mate-token-variable: #f78c6c;
+  --coder-mate-token-type: #ffcb6b;
+  --coder-mate-token-constant: #f78c6c;
+  --coder-mate-token-property: #80cbc4;
+  --coder-mate-token-tag: #f07178;
+  --coder-mate-token-attribute: #ffcb6b;
+}
+
+/* Material Light Theme */
+[data-theme='material-light'] {
+  --coder-mate-bg: #fafafa;
+  --coder-mate-fg: #212121;
+  --coder-mate-gutter-bg: #f5f5f5;
+  --coder-mate-gutter-fg: #9e9e9e;
+
+  --coder-mate-token-keyword: #0d47a1;
+  --coder-mate-token-string: #43a047;
+  --coder-mate-token-number: #f50057;
+  --coder-mate-token-identifier: #1976d2;
+  --coder-mate-token-operator: #212121;
+  --coder-mate-token-punctuation: #212121;
+  --coder-mate-token-comment: #9e9e9e;
+  --coder-mate-token-function: #6a1b9a;
+  --coder-mate-token-variable: #1976d2;
+  --coder-mate-token-type: #f57f207;
+  --coder-mate-token-constant: #f50057;
+  --coder-mate-token-property: #1976d2;
+  --coder-mate-token-tag: #d32f2f;
+  --coder-mate-token-attribute: #6a1b9a;
+}
+
+/* Token Styles */
+.token-keyword {
+  color: var(--coder-mate-token-keyword);
+}
+.token-string {
+  color: var(--coder-mate-token-string);
+}
+.token-number {
+  color: var(--coder-mate-token-number);
+}
+.token-identifier {
+  color: var(--coder-mate-token-identifier);
+}
+.token-operator {
+  color: var(--coder-mate-token-operator);
+}
+.token-punctuation {
+  color: var(--coder-mate-token-punctuation);
+}
+.token-comment {
+  color: var(--coder-mate-token-comment);
+}
+.token-function {
+  color: var(--coder-mate-token-function);
+}
+.token-variable {
+  color: var(--coder-mate-token-variable);
+}
+.token-type {
+  color: var(--coder-mate-token-type);
+}
+.token-constant {
+  color: var(--coder-mate-token-constant);
+}
+.token-property {
+  color: var(--coder-mate-token-property);
+}
+.token-tag {
+  color: var(--coder-mate-token-tag);
+}
+.token-attribute {
+  color: var(--coder-mate-token-attribute);
+}
+.token-decorator {
+  color: var(--coder-mate-token-decorator);
+}
+.token-namespace {
+  color: var(--coder-mate-token-namespace);
+}
+.token-interpolation {
+  color: var(--coder-mate-token-interpolation);
+}
+.token-regex {
+  color: var(--coder-mate-token-regex);
+}
+.token-boolean {
+  color: var(--coder-mate-token-boolean);
+}
+.token-text {
+  color: var(--coder-mate-token-text);
+}
+.token-unknown {
+  color: var(--coder-mate-token-unknown);
+}
+
+/* Container Styles */
+.coder-mate-container {
+  background-color: var(--coder-mate-bg);
+  color: var(--coder-mate-fg);
+}
+.coder-mate-gutter {
+  background-color: var(--coder-mate-gutter-bg);
+  color: var(--coder-mate-gutter-fg);
 }
