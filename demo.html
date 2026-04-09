@@ -84,11 +84,13 @@ class ES2020SyntaxHighlighter {
       // 反引号模板字符串状态（含插值）
       'string-backtick': [
         { regex: /^\$\{/, scope: 'punctuation.definition.template-expression.js', pushState: 'template-interpolation' }, // 插值开始${
-        { regex: /^[^\\`]*(?:\\.[^\\`]*)*`/, scope: 'string.quoted.backtick.js', popState: true }, // 字符串结束
-        { regex: /^.*/, scope: 'string.quoted.backtick.js' } // 未闭合的字符串
+        { regex: /^[^\\`\$]+/, scope: 'string.quoted.backtick.js' }, // 普通字符串内容（不包含\、`、$）
+        { regex: /^\\./, scope: 'string.quoted.backtick.js' }, // 转义字符
+        { regex: /^\$/, scope: 'string.quoted.backtick.js' }, // 单独的$（不是${）
+        { regex: /^`/, scope: 'string.quoted.backtick.js', popState: true } // 字符串结束
       ],
 
-      // 模板插值状态（${}内的JS代码）
+      // 模板插值状态（${}内的 JS 代码）
       'template-interpolation': [
         { regex: /^}/, scope: 'punctuation.definition.template-expression.js', popState: true }, // 插值结束}
         // 复用全局规则的核心语法（关键字/运算符/字符串等）
@@ -99,7 +101,8 @@ class ES2020SyntaxHighlighter {
         { regex: /^'/, scope: 'string.quoted.single.js', pushState: 'string-single' },
         { regex: /^\d+n?/, scope: 'constant.numeric.js' },
         { regex: /^[a-zA-Z_$][a-zA-Z0-9_$]*/, scope: 'variable.identifier.js' },
-        { regex: /^[+\-*/=<>!&|.,;:()[\]{}]/, scope: 'operator.js' },
+        { regex: /^[+\-*/=<>!&|.,;:()[\]]/, scope: 'operator.js' }, // 包含括号
+        { regex: /^\{/, scope: 'operator.js' }, // 左大括号
         { regex: /^./, scope: 'variable.identifier.js' } // 兜底
       ],
 
