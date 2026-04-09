@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module" src="./main.js"></script>
+    <script type="module">
+      const code = 'let a = 10; console.log(a);'
+      debugger
+      const tokens = generateTokens(code)
+      console.log(tokens)
+    </script>
+  </body>
+</html>
